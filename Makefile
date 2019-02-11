@@ -1,5 +1,4 @@
 APP?=tracking-workshop
-PROJECT?=.
 
 .PHONY: env-up
 env-up:
@@ -17,4 +16,4 @@ clean:
 .PHONY: build
 build: clean
 	@echo "+ $@"
-	go build -o bin/${APP} ${PROJECT}/cmd/tracking
+	go build -o bin/${APP} ./cmd/tracking
