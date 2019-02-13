@@ -12,3 +12,9 @@ CREATE TABLE tracking (
   timestamp timestamp,
   PRIMARY KEY ((messageid), userid)
 );
+
+########### Business-logic queries
+
+INSERT INTO tracking (messageID, userID, status, timestamp) VALUES (?, ?, ?, ?);
+
+SELECT status FROM tracking WHERE messageID = ? AND userID = ?;

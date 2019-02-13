@@ -1,62 +1,72 @@
-version: '2.1'
+version: '3'
 
 services:
   cassandra:
-    hostname: cassandra
-    container_name: workshop_cassandra
     image: cassandra:3.11.1
+    container_name: workshop_cassandra
     ports:
-      - "9042:9042"
+    - "9042:9042"
     volumes:
-      - /tmp/data/cassandra:/var/lib/cassandra
+    - cassandra_data:/var/lib/cassandra
+    environment:
+    - MAX_HEAP_SIZE=500M
+    - HEAP_NEWSIZE=250M
+    labels:
+    - SERVICE_9042_NAME=cassandra
+    - SERVICE_7000_IGNORE=true
+    - SERVICE_7001_IGNORE=true
+    - SERVICE_7199_IGNORE=true
+    - SERVICE_9160_IGNORE=true
 
   consul:
-    hostname: consul
-    container_name: workshop_consul
     image: consul:1.4.0
+    container_name: workshop_consul
     ports:
-      - "8500:8500"
-    volumes:
-      - /tmp/data/consul:/consul/data
+    - "8500:8500"
     command: agent -server -ui -client 0.0.0.0 -bootstrap-expect=1
     restart: always
     labels:
-      - SERVICE_IGNORE=true
+    - SERVICE_IGNORE=true
 
   prometheus:
     image: prom/prometheus:v2.6.1
-    hostname: prometheus
     container_name: workshop_prometheus
     command:
-      - '--config.file=/etc/prometheus/prometheus.yml'
-      - '--storage.tsdb.path=/prometheus'
-      - '--web.console.libraries=/etc/prometheus/console_libraries'
-      - '--web.console.templates=/etc/prometheus/consoles'
-      - '--storage.tsdb.retention=200h'
-      - '--web.enable-lifecycle'
+    - '--config.file=/etc/prometheus/prometheus.yml'
+    - '--storage.tsdb.path=/prometheus'
+    - '--web.console.libraries=/etc/prometheus/console_libraries'
+    - '--web.console.templates=/etc/prometheus/consoles'
+    - '--storage.tsdb.retention=200h'
+    - '--web.enable-lifecycle'
     ports:
-      - "9090:9090"
+    - "9090:9090"
     volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    - prometeus_data:/prometheus
 
   grafana:
     image: grafana/grafana:5.4.2
-    hostname: grafana
     container_name: workshop_grafana
-    user: ${CURRENT_UID}
     volumes:
-     - /tmp/data/grafana:/var/lib/grafana
-     - /tmp/data/grafana-source/datasources:/etc/grafana/datasources
-     - /tmp/data/grafana-source/dashboards:/etc/grafana/dashboards
+    - grafana_data:/var/lib/grafana
+    - grafana_data:/etc/grafana/datasources
+    - grafana_data:/etc/grafana/dashboards
     ports:
-      - "3000:3000"
+    - "3000:3000"
 
   registrator:
     image: gliderlabs/registrator:latest
-    command: "-ip consul consul://consul:8500"
     container_name: workshop_registartor
-    hostname: registartor
+    command: "-internal consul://consul:8500"
     depends_on:
-     - consul
+    - consul
     volumes:
-      - /var/run/docker.sock:/tmp/docker.sock
+    - /var/run/docker.sock:/tmp/docker.sock
+
+volumes:
+  cassandra_data:
+    external: false
+  grafana_data:
+    external: false
+  prometeus_data:
+    external: false

@@ -1,0 +1,12 @@
+[server]
+Host="127.0.0.1"
+Port=8084
+
+[consul]
+hostport="consul:8500"
+ttl="5s"
+service_name="TrackingService"
+
+[storage]
+host="127.0.0.1"
+port=9042
