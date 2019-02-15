@@ -18,7 +18,7 @@ LDFLAGS = "-s -w -X $(PROJECT)/pkg/version.RELEASE=$(RELEASE)"
 build: clean
 	@echo "+ $@"
 	CGO_ENABLED=0 GOOS=${GOOS} GOARCH=${GOARCH} go build -a -installsuffix cgo \
-		-ldflags $(LDFLAGS) -o bin/${GOOS}-${GOARCH}/${APP} ${PROJECT}/cmd/tracking
+		-ldflags $(LDFLAGS) -o bin/${GOOS}-${GOARCH}/${APP} cmd/tracking/main.go
 	docker build --pull -t $(CONTAINER_IMAGE):$(RELEASE) .
 
 clean:
@@ -32,3 +32,4 @@ push: build
 .PHONY: deploy
 deploy: push
 	helm upgrade ${APP} -f charts/values.yaml charts --namespace ${NAMESPACE} --version=${RELEASE} -i --wait
+
