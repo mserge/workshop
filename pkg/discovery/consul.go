@@ -46,12 +46,21 @@ func GetServiceNode(consulClient *api.Client, serviceName string) (*ServiceNode,
 
 func RegisterService(consulClient *api.Client, cfg *config.Config) error {
 	err := consulClient.Agent().ServiceRegister(&api.AgentServiceRegistration{
-		ID:      getServiceID(cfg.Consul.ServiceName, cfg.Server.Host),
+		ID:      getServiceID(cfg.Consul.Servicename, cfg.Server.Host),
 		Name:    cfg.Consul.ServiceName,
 		Address: cfg.Server.Host,
 		Port:    cfg.Server.Port,
 	})
 
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func DeregisterService(consulClient *api.Client, cfg *config.Config) error {
+	err := consulClient.Agent().ServiceDeregister(getServiceID(cfg.Consul.Servicename, cfg.Server.Host))
 	if err != nil {
 		return err
 	}

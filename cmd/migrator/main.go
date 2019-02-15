@@ -74,8 +74,10 @@ func createTable(clusterConfig *gocql.ClusterConfig, tableName string) error {
 	defer session.Close()
 
 	createTableQuery := fmt.Sprintf(migrations.CreateTable, tableName)
+
 	err = session.Query(createTableQuery).Exec()
-	if err != nil {
+
+	if err != gocql.ErrTimeoutNoResponse && err != nil {
 		return err
 	}
 

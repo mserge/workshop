@@ -18,7 +18,7 @@ type ServerConfig struct {
 type ConsulConfig struct {
 	Hostport    string
 	Ttl         string
-	ServiceName string
+	Servicename string
 }
 
 type StorageConfig struct {
