@@ -62,7 +62,13 @@ services:
     - consul
     volumes:
     - /var/run/docker.sock:/tmp/docker.sock
-
+  tracking:
+    container_name: workshop_tracking
+    build: .
+    ports:
+        - "8084:8084"
+    volumes:
+        - ./config:/config
 volumes:
   cassandra_data:
     external: false
