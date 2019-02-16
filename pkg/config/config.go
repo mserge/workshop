@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-const SERVICENAME = "montacini"
+const SERVICENAME = "montalcini"
 
 type Config struct {
 	Server  ServerConfig
