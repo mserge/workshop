@@ -31,6 +31,7 @@ func (s *Server) SaveActionHandler(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(400)
 		return
 	}
+	// TODO
 
 	w.WriteHeader(201)
 	w.Header().Add("Content-Type", "application/json;charset=utf-8")
@@ -43,6 +44,7 @@ func (s *Server) GetActionStatusHandler(w http.ResponseWriter, r *http.Request) 
 	userID := queryString.Get("user_id")
 
 	fmt.Printf("message_id: %v, user_id: %v\n", messageID, userID)
+	// TODO
 
 	w.WriteHeader(200)
 	w.Header().Add("Content-Type", "application/json;charset=utf-8")

@@ -3,6 +3,8 @@ package main
 import (
 	"flag"
 	"fmt"
+	"gitlab.k8s.gromnsk.ru/workshop/montalcini/migrations"
+	"gitlab.k8s.gromnsk.ru/workshop/montalcini/pkg/config"
 	"log"
 
 	"github.com/gocql/gocql"

@@ -2,6 +2,8 @@ package tracking
 
 import (
 	"fmt"
+	"gitlab.k8s.gromnsk.ru/workshop/montalcini/pkg/config"
+	"gitlab.k8s.gromnsk.ru/workshop/montalcini/pkg/handlers"
 	"log"
 	"net/http"
 )
