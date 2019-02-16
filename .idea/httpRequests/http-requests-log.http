@@ -1,3 +1,75 @@
+POST https://montalcini.k8s.gromnsk.ru/save
+
+{"message_id":"ABCDE","user_id":"mserge", "status":"done"}
+
+<> 2019-02-16T084518.201.txt
+
+###
+
+POST https://montalcini.k8s.gromnsk.ru/save
+
+{"message_id":"ABCDE","user_id":"mserge", "status":"sent"}
+
+<> 2019-02-16T084508.201.txt
+
+###
+
+GET https://montalcini.k8s.gromnsk.ru/get-status?message_id=ABCDE&user_id=mserge
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-16T084503.200.txt
+
+###
+
+POST http://montalcini.k8s.gromnsk.ru/save
+
+{"message_id":"ABCDE","user_id":"mserge", "status":"sent"}
+
+<> 2019-02-16T084304.308.html
+
+###
+
+GET http://montalcini.k8s.gromnsk.ru/get-status?message_id=ABCDE&user_id=mserge
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-16T084231.308.html
+
+###
+
+GET http://montalcini.k8s.gromnsk.ru/get-status?message_id=ABCDE&user_id=mserge
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-16T084114.308.html
+
+###
+
+GET http://montalcini.k8s.gromnsk.ru/get-status?message_id=ABCDE&user_id=mserge
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-16T084104.308.html
+
+###
+
+GET http://montalcini.k8s.gromnsk.ru/get-status?message_id=ABCDE&user_id=mserge
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-16T084059.308.html
+
+###
+
+POST http://192.168.99.100:8084/save
+
+{"message_id":"ABCDE","user_id":"user", "status":"done"}
+
+<> 2019-02-16T084042.201.txt
+
+###
+
 POST http://192.168.99.100:8084/save
 
 {"message_id":"ABCDE","user_id":"user", "status":"done"}
