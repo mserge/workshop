@@ -8,7 +8,7 @@ image:
   name: montalcini
   tag: 0.0.1
 
-  pullSecretName: registry-pull-secret
+  pullSecretName: registry-montalcini
 
   pullPolicy: Always
 

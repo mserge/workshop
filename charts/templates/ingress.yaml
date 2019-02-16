@@ -21,7 +21,6 @@ metadata:
   name: {{ template "name" . }}
 spec:
   rules:
-  {{- if eq $namespace $workflow }}
   {{- if .Values.ingress.hostBased }}
   {{- range .Values.ingress.hostBased.hosts }}
   - host: {{ . }}
@@ -32,14 +31,11 @@ spec:
             serviceName: {{ $serviceName }}
             servicePort: {{ $servicePort }}
   {{- end -}}
-  {{- end -}}
   {{- end }}
-  tls:
-  {{- if eq $namespace $workflow }}
-  {{- if .Values.ingress.hostBased }}
-  {{- if .Values.ingress.hostBased.tls }}
+    tls:
+    {{- if .Values.ingress.hostBased }}
+    {{- if .Values.ingress.hostBased.tls }}
   {{ toYaml .Values.ingress.hostBased.tls | indent 2 }}
-  {{- end -}}
-  {{- end -}}
-  {{- end }}
+    {{- end -}}
+    {{- end -}}
   {{- end -}}
