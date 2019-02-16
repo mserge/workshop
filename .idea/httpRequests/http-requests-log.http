@@ -1,0 +1,58 @@
+GET http://localhost:8084/get-status?message_id=ABCDE&user_id=user
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-16T035121.200.txt
+
+###
+
+GET http://localhost:8084/get-status?message_id=ABCDE&user_id=use
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+GET http://localhost:8084/get-status?message_id=ABCDE&user_id=user
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-16T035036.200.txt
+
+###
+
+POST http://localhost:8084/save
+
+{"message_id":"ABCDE","user_id":"user", "status":"sent"}
+
+<> 2019-02-16T034737.201.txt
+
+###
+
+POST http://localhost:8084/save
+
+{"message_id":"ABCDE","user_id":"user", status:"sent"}
+
+###
+
+POST http://localhost:8084/save
+
+{"message_id":"ABCDE","user_id":"user"}
+
+<> 2019-02-16T034635.201.txt
+
+###
+
+POST http://localhost:8084/save
+
+{"message_id":"ABCDE","user_id":"user"}
+
+###
+
+GET http://localhost:8084/get-status?message_id=1&user_id=1
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-16T024516.200.txt
+
+###
+
