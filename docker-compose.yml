@@ -57,7 +57,7 @@ services:
   registrator:
     image: gliderlabs/registrator:latest
     container_name: workshop_registartor
-    command: "-internal consul://consul:8500"
+    command: "-internal=false -ip=\"192.168.99.100\" consul://consul:8500"
     depends_on:
     - consul
     volumes:
@@ -67,6 +67,7 @@ services:
     build: .
     environment:
       MONTALCINI_CONSUL_HOSTPORT: consul:8500
+      MONTALCINI_SERVER_HOST: 192.168.99.100
     ports:
         - "8084:8084"
     volumes:
