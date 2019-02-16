@@ -2,7 +2,10 @@ package config
 
 import (
 	"github.com/spf13/viper"
+	"strings"
 )
+
+const SERVICENAME = "montacini"
 
 type Config struct {
 	Server  ServerConfig
@@ -35,6 +38,11 @@ func GetConfig() (*Config, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	viper.SetEnvPrefix(SERVICENAME)
+	replacer := strings.NewReplacer(".", "_")
+	viper.SetEnvKeyReplacer(replacer)
+	viper.AutomaticEnv()
 
 	cfg := &Config{}
 	err = viper.Unmarshal(cfg)
