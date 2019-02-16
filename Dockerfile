@@ -1,3 +1,12 @@
 FROM scratch
-ADD ./main /
-CMD ["/main"]
+
+ENV MONTALCINI_SERVER_HOST 127.0.0.1
+ENV MONTALCINI_SERVER_PORT 8084
+ENV MONTALCINI_CONSUL_HOSTPORT=consul.k8s.gromnsk.ru:8500
+
+EXPOSE $MONTALCINI_SERVER_PORT
+
+COPY bin/linux-amd64/montalcini /
+COPY config/config.toml /config/
+
+CMD ["/montalcini"]

@@ -1,4 +1,4 @@
-APP?=workshop
+APP?=montalcini
 RELEASE?=0.0.1
 
 

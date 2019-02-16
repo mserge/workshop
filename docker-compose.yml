@@ -65,6 +65,8 @@ services:
   tracking:
     container_name: workshop_tracking
     build: .
+    environment:
+      MONTALCINI_CONSUL_HOSTPORT: consul:8500
     ports:
         - "8084:8084"
     volumes:

@@ -1,10 +1,18 @@
 package storage
 
-import "github.com/gocql/gocql"
+import (
+	"github.com/gocql/gocql"
+	"time"
+)
 
 func InitStorage(hostport, keyspace string) (*gocql.Session, error) {
 	clusterConfig := gocql.NewCluster(hostport)
 	clusterConfig.Keyspace = keyspace
+	clusterConfig.ConnectTimeout = 10 * time.Second
+	clusterConfig.Authenticator = gocql.PasswordAuthenticator{
+		Username: "cassandra",
+		Password: "iD5hBMkSfDTF",
+	}
 
 	session, err := clusterConfig.CreateSession()
 	if err != nil {

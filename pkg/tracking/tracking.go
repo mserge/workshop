@@ -27,7 +27,8 @@ func Run(cfg *config.Config) {
 	log.Printf(" Going to connect %s:%d", serviceNode.Address, serviceNode.Port)
 
 	keyspace := cfg.Storage.Keyspace
-	hostport := fmt.Sprintf("%s:%d", cfg.Storage.Host, cfg.Storage.Port)
+	//hostport := fmt.Sprintf("%s:%d", cfg.Storage.Host, cfg.Storage.Port)
+	hostport := fmt.Sprintf("%s:%d", serviceNode.Address, serviceNode.Port)
 	session, err := storage.InitStorage(hostport, keyspace)
 	if err != nil {
 		log.Fatalf("failed to init  storage: %v\n", err)
@@ -51,6 +52,8 @@ func Run(cfg *config.Config) {
 	http.HandleFunc("/get-status", server.GetActionStatusHandler)
 
 	http.HandleFunc("/healthz", server.HealthHandler)
+	http.HandleFunc("/readyz", server.ReadyzHandler)
+	http.HandleFunc("/", server.ReadyzHandler)
 	http.Handle("/metrics", promhttp.Handler())
 
 	fmt.Printf("Service starting on port %d..\n", cfg.Server.Port)
